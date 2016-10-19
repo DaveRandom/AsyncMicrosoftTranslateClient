@@ -140,6 +140,6 @@ class Client
 
     public function getTranslation(string $accessToken, string $text, string $to, string $from = null): Promise
     {
-        return resolve($this->doGetTranslation($accessToken, $text, $from, $to));
+        return resolve($this->doGetTranslation($accessToken, $text, $to, $from));
     }
 }
