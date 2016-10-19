@@ -21,7 +21,7 @@
         "amp"
     ],
     "autoload": {
-        "psr-4": {"DaveRandom\\AsyncMicrosoftTranslateClient\\": "src/"},
+        "psr-4": {"DaveRandom\\AsyncMicrosoftTranslate\\": "src/"},
         "files": ["src/helpers.php"]
     },
     "require": {
