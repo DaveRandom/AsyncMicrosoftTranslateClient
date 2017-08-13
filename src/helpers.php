@@ -2,7 +2,7 @@
 
 namespace DaveRandom\AsyncMicrosoftTranslate;
 
-const AUTH_URL    = 'https://datamarket.accesscontrol.windows.net/v2/OAuth2-13/';
+const AUTH_URL    = 'https://api.cognitive.microsoft.com/sts/v1.0/issueToken';
 const BASE_URL    = 'http://api.microsofttranslator.com';
 const SERVICE_URL = BASE_URL . '/V2/Http.svc';
 

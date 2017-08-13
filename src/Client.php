@@ -49,27 +49,23 @@ class Client
 
     private function doGetAccessToken(Credentials $credentials)
     {
-        $body = (new FormBody)
-            ->addField('grant_type', 'client_credentials')
-            ->addField('scope', BASE_URL)
-            ->addField('client_id', $credentials->getClientId())
-            ->addField('client_secret', $credentials->getClientSecret());
-
         $request = (new HttpRequest)
             ->setMethod('POST')
             ->setUri(AUTH_URL)
-            ->setBody($body);
+            ->setHeader('Content-Type', 'application/json')
+            ->setHeader('Accept', 'application/jwt')
+            ->setHeader('Ocp-Apim-Subscription-Key', $credentials->getClientSecret());
 
         /** @var HttpResponse $response */
         $response = yield $this->httpClient->request($request);
 
-        $decoded = json_try_decode($response->getBody());
+        $responseBody = $response->getBody();
 
-        if (!empty($decoded->error)){
-            throw new \RuntimeException($decoded->error_description);
+        if ($response->getStatus() !== 200) {
+            throw new \RuntimeException(json_try_decode($responseBody)->message);
         }
 
-        return $decoded->access_token;
+        return $responseBody;
     }
 
     private function doGetSupportedLanguages(string $accessToken, string $locale)
